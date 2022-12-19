@@ -4,6 +4,13 @@ import { Login } from "./pages/Auth/Login";
 import { Register } from './pages/Auth/Register';
 import { Home } from "./pages/Home";
 
+import "./stylesheets/theme.css";
+import "./stylesheets/alignments.css";
+import "./stylesheets/textElement.css";
+import "./stylesheets/customComponents.css";
+import "./stylesheets/formElements.css";
+
+
 function App() {
   return (
     <div>
