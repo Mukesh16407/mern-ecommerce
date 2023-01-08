@@ -1,43 +1,31 @@
-import { Form } from "antd";
 import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Card } from '../../Components/card/Card';
+import registeImg from '../../assets/register.png';
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
-
-  const onFinish=()=>{
-    
-  }
   return (
-    <div className="flex justify-center items-center h-screen w-screen ">
-      <div className="card w-400 p-3 bg-white">
-        <div className="flex flex-col">
-          <h1 className="text-2xl">
-            REGISTER<i className="ri-user-add-line"></i>
-          </h1>
-          <div className="divider"></div>
-          <Form layout="vertical" className="mt-2"onFinish={onFinish}>
-            <Form.Item name="name" label="Name">
-              <input type="text" />
-            </Form.Item>
-            <Form.Item name="email" label="Email">
-              <input type="text" />
-            </Form.Item>
-            <Form.Item name="password" label="Password">
-              <input type="password" />
-            </Form.Item>
-            <div className="flex flex-col gap-2">
-              <button
-                type="submit"
-                className="primary-contained-btn mt-2 w-100"
-              >
-                Register
-              </button>
-              <Link to="/login">Already a member? Login</Link>
-            </div>
-          </Form>
+    <section className="container auth">
+      <Card>
+        <div className="form">
+          <h2>REGISTER</h2>
+          <form>
+            <input type="text" placeholder="Email" required />
+            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Conform Password" required />
+            <button className="btn --btn-block --btn-primary">REGISTER</button>
+            <span className="register">
+              <p style={{ color: "black" }}>Already have an Account?</p>
+              <Link to={"/login"} style={{ color: "black" }}>
+                Login
+              </Link>
+            </span>
+          </form>
         </div>
+      </Card>
+      <div className="img">
+        <img src={registeImg} alt="RegisterImg" width={"400px"} />
       </div>
-    </div>
+    </section>
   );
 };

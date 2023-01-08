@@ -1,43 +1,38 @@
-import { Form } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import './auth.css'
+import loginImg from '../../assets/login.png'
+import { Link } from 'react-router-dom';
+import GoogleIcon from '@mui/icons-material/Google';
+import { Card } from '../../Components/card/Card';
 
 export const Login = () => {
 
-  const onFinish=()=>{
-    
-  }
+  
   return (
-    <div className="flex justify-center items-center h-screen w-screen ">
-      <div className="card w-400 p-3 bg-white">
-        <div className="flex flex-col">
-          <div className="flex">
-            <h1 className="text-2xl">LOGIN <i className="ri-login-circle-line"></i></h1>
-            
+   <section className='container auth'>
+       <div className='img'>
+        <img src={loginImg} alt='LoginImg'width={"400px"}/>
+       </div>
+       <Card>
+       <div className='form'>
+         <h2>LOGIN</h2>
+         <form >
+          <input type="text" placeholder='Email' required/>
+          <input type="password" placeholder='Password'required/>
+          <button className='btn --btn-block --btn-primary'>Login</button>
+          <div className='links'>
+            <Link to={"/reset"} style={{color:"black"}}>Reset Password</Link>
           </div>
-          <div className="divider"></div>
-          <Form layout="vertical" className="mt-2" onFinish={onFinish}>
-            <Form.Item name="email" label="Email">
-              <input type="text" />
-            </Form.Item>
-            <Form.Item name="password" label="Password">
-              <input type="password" />
-            </Form.Item>
-
-            <div className="flex flex-col gap-2">
-              <button
-                type="submit"
-                className="primary-contained-btn mt-2 w-100"
-              >
-                Login
-              </button>
-              <Link to="/register" className="underline">
-                Not a member? Register
-              </Link>
-            </div>
-          </Form>
-        </div>
-      </div>
-    </div>
+          <p style={{color:"black"}}>--or--</p>
+         </form>
+         <button className='btn --btn-block --btn-danger'>
+         <GoogleIcon/>Login With Google
+         </button>
+         <span className='register'><p  style={{color:"black"}}>Don't have an Account?</p>
+         <Link to={"/register"} style={{color:"black"}}>Register</Link>
+         </span>
+       </div>
+       </Card>
+    </section>
   )
 }

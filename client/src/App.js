@@ -3,12 +3,8 @@ import { Header } from "./Components/Nav/Header";
 import { Login } from "./pages/Auth/Login";
 import { Register } from './pages/Auth/Register';
 import { Home } from "./pages/Home";
-
-import "./stylesheets/theme.css";
-import "./stylesheets/alignments.css";
-import "./stylesheets/textElement.css";
-import "./stylesheets/customComponents.css";
-import "./stylesheets/formElements.css";
+import { Footer } from "./Components/footer/Footer";
+import { Reset } from "./pages/Auth/Reset";
 
 
 function App() {
@@ -20,7 +16,9 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={ <Register/>}/>
+        <Route path="/reset" element={<Reset/>}/>
        </Routes>
+       <Footer/>
       </BrowserRouter>
     
     </div>
