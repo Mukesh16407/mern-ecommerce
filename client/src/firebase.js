@@ -1,8 +1,10 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth} from "firebase/auth";
+import {getFirestore} from 'firebase/firestore';
+import {getStorage} from 'firebase/storage'
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDkz5ZmywDc8S4qYBbyEnjX8qPfFg6iQrY",
   authDomain: "mern-ecommerce-84687.firebaseapp.com",
   projectId: "mern-ecommerce-84687",
@@ -16,4 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth =getAuth(app);
-export default app;
+export const db =getFirestore(app);
+export const storagde =getStorage(app);
+
+export default app

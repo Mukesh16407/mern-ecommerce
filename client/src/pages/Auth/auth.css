@@ -30,9 +30,9 @@ form>input {
 }
 
 h2 {
-    color: orangered;
+    color: var(--color-danger);
     text-align: center;
-}
+  }
 
 .links {
     display: flex;
@@ -46,6 +46,31 @@ p {
 
 .register {
     display: flex;
-    justify-content: center;
-    align-items: center;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+ }
+
+ @keyframes slide-up {
+    0% {
+      transform: translateY(-5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
+  @keyframes slide-down {
+    0% {
+      transform: translateY(5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+@media screen and (max-width: 700px) {
+  .img {
+    display: none;
+  }
+}

@@ -19,17 +19,17 @@ export const Login = () => {
          <form >
           <input type="text" placeholder='Email' required/>
           <input type="password" placeholder='Password'required/>
-          <button className='btn --btn-block --btn-primary'>Login</button>
+          <button className='--btn --btn-block --btn-primary'>Login</button>
           <div className='links'>
-            <Link to={"/reset"} style={{color:"black"}}>Reset Password</Link>
+            <Link to={"/reset"}>Reset Password</Link>
           </div>
           <p style={{color:"black"}}>--or--</p>
          </form>
-         <button className='btn --btn-block --btn-danger'>
-         <GoogleIcon/>Login With Google
+         <button className='--btn --btn-block --btn-danger'>
+         <GoogleIcon style={{marginRight:"5px"}}/> Login With Google
          </button>
          <span className='register'><p  style={{color:"black"}}>Don't have an Account?</p>
-         <Link to={"/register"} style={{color:"black"}}>Register</Link>
+         <Link to={"/register"}>Register</Link>
          </span>
        </div>
        </Card>

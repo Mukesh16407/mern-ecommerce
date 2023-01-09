@@ -16,13 +16,13 @@ export const Reset = () => {
          <form >
           <input type="text" placeholder='Email' required/>
           
-          <button className='btn --btn-block --btn-primary'>RESET PASSWORD</button>
+          <button className='--btn --btn-block --btn-primary'>RESET PASSWORD</button>
           <div className='links'>
             <p>
-            <Link to={"/register"} style={{color:"black"}}>-Register</Link>
+            <Link to={"/register"} >-Register</Link>
             </p>
             <p>
-            <Link to={"/login"} style={{color:"black"}}>-Login</Link>
+            <Link to={"/login"}>-Login</Link>
             </p>
           </div>
           
