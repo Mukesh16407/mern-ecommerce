@@ -1,8 +1,9 @@
 import React from 'react'
 import { Menu } from 'antd';
-import { HomeOutlined ,UserOutlined,UserAddOutlined,  SettingOutlined } from '@ant-design/icons';
+import { HomeOutlined ,UserOutlined,UserAddOutlined,  SettingOutlined ,UserDeleteOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 const items = [
   {
     label: <Link to="/">Home</Link>,
@@ -14,7 +15,7 @@ const items = [
     key: 'user',
   
     icon: <SettingOutlined />,
-    style: { marginRight:"70%" } ,
+    style: { marginRight:"63%" } ,
     children: [
       {
         label: 'Option 1',
@@ -41,6 +42,13 @@ const items = [
     label: <Link to="/login">Login</Link>,
     key: 'login',
     icon: <UserOutlined />,
+   
+   
+  },
+  {
+    label: <Link to="/login">Logout</Link>,
+    key: 'logout',
+    icon: <UserDeleteOutlined />,
    
    
   },
