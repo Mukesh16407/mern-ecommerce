@@ -1,5 +1,5 @@
 .footer {
-    background-color: #0a1930;
+    background-color: var(--dark-blue);
     color: #fff;
     font-size: 1.6rem;
     display: flex;
