@@ -1,12 +1,14 @@
-import React from 'react'
+import ReactDOM from 'react-dom'
 import loaderImg from "../../assets/loader.gif";
+import './loader.css';
 
 export const Loader = () => {
-  return (
+  return ReactDOM.createPortal(
     <div className="wrapper">
       <div className="loader">
         <img src={loaderImg} alt="Loading..." />
       </div>
-    </div>
+    </div>,
+  document.getElementById("loader")
   )
 }

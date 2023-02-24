@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { Menu } from "antd";
 import {FaShoppingCart, FaTimes} from 'react-icons/fa';
 import {HiOutlineMenu} from 'react-icons/hi'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { signOut, updateEmail } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -25,7 +25,12 @@ const cart = (
     </NavLink>
   </div>
 );
+
+const activeLink = ({ isActive }) => (isActive ? `${"active"}` : "");
 export const Header = () => {
+
+ const navigate = useNavigate()
+
   const [showMenu,setShowMenu] = useState(false)
   const [current, setCurrent] = useState("home");
   const [currentEmail, setCurrentEmail] = useState("");
@@ -42,13 +47,14 @@ export const Header = () => {
   const hideMenu =()=>{
     setShowMenu(false)
   }
-  // const logOutUser=()=>{
-  //   signOut(auth).then(() => {
-  //    toast.success("Sign Out Successfully")
-  //   }).catch((error) => {
-  //     toast.error(error.message)
-  //   });
-  // }
+  const logOutUser=()=>{
+    signOut(auth).then(() => {
+     toast.success("Sign Out Successfully");
+     navigate("/")
+    }).catch((error) => {
+      toast.error(error.message)
+    });
+  }
   // monetring currently signin user
   useEffect(() => {
     // updateEmail(auth.currentUser, "user@example.com").then(() => {
@@ -71,20 +77,21 @@ export const Header = () => {
              <FaTimes size={22} color="#fff" onClick={hideMenu}/>
             </li>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" className={activeLink}>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/contact">Contact Us</NavLink>
+              <NavLink to="/contact"className={activeLink}>Contact Us</NavLink>
             </li>
           </ul>
           <div className="header-right"onClick={hideMenu}>
             <span className="links">
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/register">Register</NavLink>
-              <NavLink to="/order-history">My Order</NavLink>
+              <NavLink to="/login"className={activeLink}>Login</NavLink>
+              <NavLink to="/register"className={activeLink}>Register</NavLink>
+              <NavLink to="/order-history"className={activeLink}>My Order</NavLink>
+              <NavLink to="/" onClick={logOutUser}>Log Out</NavLink>
             </span>
             <span className="cart">
-              <NavLink to="/cart">{cart}</NavLink>
+              <NavLink to="/cart"className={activeLink} >{cart}</NavLink>
             </span>
           </div>
           

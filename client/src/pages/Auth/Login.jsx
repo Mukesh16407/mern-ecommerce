@@ -79,7 +79,7 @@ export const Login = () => {
                 Login
               </button>
               <div className="links">
-                <Link to={"/reset"}>Reset Password</Link>
+                <Link to={"/reset"} style={{color:"black"}}>Reset Password</Link>
               </div>
               <p style={{ color: "black" }}>--or--</p>
             </form>
