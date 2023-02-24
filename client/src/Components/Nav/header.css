@@ -1,13 +1,21 @@
-header{
- width: 100%;
-  background-color: var(--dark-blue);
-  color: #fff;
-  border: 1px solid purple;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
+.fixed {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    transition: all 0.5s;
+    z-index: 9;
 }
-.header{
+
+header {
+    width: 100%;
+    background-color: var(--dark-blue);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.header {
     width: 100%;
     height: 8rem;
     margin: 0 auto;
@@ -19,76 +27,227 @@ header{
     flex: 0.3;
 }
 
-.header >.logo {
+.header>.logo {
     width: 25%;
 
 }
-.header >.logo >a>h2{
+
+.header>.logo>a>h2 {
     color: #fff;
     cursor: pointer;
-    border: 1px solid green;
+   
     text-align: start;
 }
-h2 >span{
+
+h2>span {
     color: orangered;
 }
 
-nav{
+nav {
     width: 75%;
     display: flex;
     justify-content: space-between;
     flex: 0.7;
 }
-ul{
+
+ul {
     display: flex;
     justify-content: space-between;
     list-style: none;
 }
-li{
+
+li {
     margin: 0 5px;
 }
-li >a{
+
+li>a {
     color: #fff;
 }
-li >a:hover{
+
+li>a:hover {
     color: orangered;
 }
 
 .header-right {
     display: flex;
 }
-.links a{
-  margin: 0 5px;
-  color: #fff;
+
+.links a {
+    margin: 0 5px;
+    color: #fff;
 }
+
 a:hover {
     color: orangered;
 }
+
 a>.active {
     color: var(--color-danger);
 
 }
-.header-right >.cart a {
+
+.header-right>.cart a {
     display: flex;
     color: #fff;
     position: relative;
 }
-.cart a:hover{
+
+.cart a:hover {
     color: orangered;
 }
-.cart a >.active{
+
+.cart a>.active {
     color: var(--color-danger);
 }
-.cart >a>p{
+
+.cart>a>p {
     position: absolute;
     top: -1.5rem;
     right: -2rem;
     font-weight: 500;
     margin-right: 1rem;
 }
-.header-right >span{
+
+.header-right>span {
     margin: 0 5px;
 }
-.header-right >span > p {
+
+.header-right>span>p {
     color: #fff;
+}
+
+.menu-icon {
+    cursor: pointer;
+    display: none;
+}
+
+.active {
+    position: relative;
+    color: var(--color-danger);
+}
+
+.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+}
+.logo-mobile{
+    display: none;
+}
+@media screen and (max-width: 800px) {
+    nav {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100vh;
+        background-color: var(--dark-blue);
+        padding: 1rem;
+        z-index: 999;
+        transform: translateX(-200%);
+        transition: all 0.3s;
+    }
+
+    .nav-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        transform: translateX();
+        transition: all 0.3s;
+    }
+
+    .show-nav-wrapper {
+        transform: translateX(100%);
+    }
+
+    nav>ul {
+        display: block;
+
+    }
+   ul{
+    display: block;
+   }
+    ul>.logo-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-mobile>* {
+        cursor: pointer;
+    }
+
+    li {
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+
+    }
+
+    li>a {
+
+        display: block;
+    }
+
+    .header-right {
+        display: block;
+    }
+
+    .cart {
+        display: block;
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+
+    .cart>a {
+        color: #fff;
+        position: relative;
+    }
+
+    .cart>a:hover {
+        color: orangered;
+    }
+
+    .cart>a>p {
+        position: absolute;
+        top: -1rem;
+        left: 5rem;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .links {
+        display: block;
+    }
+
+    .links>a {
+        display: block;
+        margin: 0;
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+
+    .show-nav {
+        transform: translateX(0);
+    }
+
+    .hide-nav {
+        transform: translateX(-200%);
+    }
+
+    .menu-icon {
+        display: flex;
+
+    }
+
+    .menu-icon>* {
+        margin-left: 2rem;
+    }
 }

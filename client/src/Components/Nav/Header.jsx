@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Menu } from "antd";
-import {FaShoppingCart} from 'react-icons/fa'
-import { useState } from "react";
+import {FaShoppingCart, FaTimes} from 'react-icons/fa';
+import {HiOutlineMenu} from 'react-icons/hi'
 import { NavLink } from "react-router-dom";
 import { auth } from "../../firebase";
 import { signOut, updateEmail } from "firebase/auth";
@@ -26,13 +26,22 @@ const cart = (
   </div>
 );
 export const Header = () => {
+  const [showMenu,setShowMenu] = useState(false)
   const [current, setCurrent] = useState("home");
   const [currentEmail, setCurrentEmail] = useState("");
+  
   const handleClick = (e) => {
     console.log("click ", e.key);
     setCurrent(e.key);
   };
 
+  const toggleMenu =()=>{
+    setShowMenu(!showMenu)
+  }
+
+  const hideMenu =()=>{
+    setShowMenu(false)
+  }
   // const logOutUser=()=>{
   //   signOut(auth).then(() => {
   //    toast.success("Sign Out Successfully")
@@ -53,8 +62,14 @@ export const Header = () => {
     <>
       <header>
         <div className="header">{logo}</div>
-        <nav>
-          <ul>
+        <nav className={showMenu ? `${"show-nav"}`: `${"hide-nav"}`}>
+          <div className={showMenu ? `${"nav-wrapper"} ${"show-nav-wrapper"}`:`${"nav-wrapper"}`} onClick={hideMenu}>
+          </div>
+          <ul onClick={hideMenu}>
+            <li className="logo-mobile">
+             {logo}
+             <FaTimes size={22} color="#fff" onClick={hideMenu}/>
+            </li>
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -62,7 +77,7 @@ export const Header = () => {
               <NavLink to="/contact">Contact Us</NavLink>
             </li>
           </ul>
-          <div className="header-right">
+          <div className="header-right"onClick={hideMenu}>
             <span className="links">
               <NavLink to="/login">Login</NavLink>
               <NavLink to="/register">Register</NavLink>
@@ -72,7 +87,12 @@ export const Header = () => {
               <NavLink to="/cart">{cart}</NavLink>
             </span>
           </div>
+          
         </nav>
+        <div className="menu-icon">
+          {cart}
+          <HiOutlineMenu size={28} onClick={toggleMenu}/>
+        </div>
       </header>
     </>
   );
