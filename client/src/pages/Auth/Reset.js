@@ -19,7 +19,7 @@ export const Reset = () => {
    sendPasswordResetEmail(auth, email)
   .then(() => {
     setIsLoading(false)
-    toast.success("Check your Email for reselt password")
+    toast.success("Check your Email for reset password")
   })
   .catch((error) => {
     setIsLoading(false)
