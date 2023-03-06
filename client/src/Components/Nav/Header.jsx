@@ -117,17 +117,20 @@ export const Header = () => {
           </ul>
           <div className="header-right" onClick={hideMenu}>
             <span className="links">
-            <ShowOnLogout>
-                <NavLink to="/login" className={activeLink}>
+              <ShowOnLogout>
+              <NavLink to="/login" className={activeLink}>
                   Login
                 </NavLink>
-                </ShowOnLogout> 
-                <ShowOnLogin> 
+
+              </ShowOnLogout>
+               
+
+              <ShowOnLogin>
                 <a href="#home" style={{ color: "#ff7722" }}>
                   <FaUserCircle size={16} />
                   Hi, {displayName}
                 </a>
-                </ShowOnLogin>
+              </ShowOnLogin>
 
                 <ShowOnLogin>
               <NavLink to="/order-history" className={activeLink}>
