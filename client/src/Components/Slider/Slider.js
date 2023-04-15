@@ -29,6 +29,7 @@ export const Slider = () => {
   useEffect(() => {
     if (autoScroll) {
       const auto = () => {
+          // eslint-disable-next-line
         slideInterval = setInterval(nextSlide, intervalTime);
       };
       auto();

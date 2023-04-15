@@ -80,7 +80,7 @@ export const Header = () => {
     signOut(auth)
       .then(() => {
         toast.success("Sign Out Successfully");
-        navigate("/");
+        navigate("/register");
       })
       .catch((error) => {
         toast.error(error.message);
