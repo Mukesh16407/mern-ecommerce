@@ -8,6 +8,16 @@ import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Loader } from "../../Components/loader/Loader";
+import axios from 'axios';
+
+const createOrUpdateUser = async(authtoken)=>{
+  debugger
+  return await axios.post(`${process.env.REACT_APP_API}/create-or-update-user`,{},{
+    headers:{
+      authtoken,
+    }
+  })
+}
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +34,11 @@ export const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        
+        //console.log(user.accessToken,"user");
+       user.getIdToken(/* forceRefresh */ true).then((idToken)=>createOrUpdateUser(idToken)).catch((error)=>console.log("error",error))
+        
+        
         setIsLoading(false);
         toast.success("User Sign Successfully");
         navigate("/");

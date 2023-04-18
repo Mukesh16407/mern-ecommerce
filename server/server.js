@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dbConfig = require('./config/db.Config')
 require('dotenv').config();
+const fs = require('fs')
 
+//import routes
 
 //app
 const app = express();
@@ -19,13 +21,11 @@ app.use(bodyParser.json({limit:"2mb"}));
 app.use(cors());
 
 
-//route
+//route middleware
 
-app.get('/api',(req,res)=>{
-    res.json({
-        data:"hey you hit node API"
-    })
-})
+fs.readdirSync('./routes').map((r)=>app.use("/api",require("./routes/" + r)))
+
+
 
 
 
