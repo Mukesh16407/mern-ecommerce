@@ -1,14 +1,16 @@
-import {configureStore,combineReducers} from '@reduxjs/toolkit';
-import authReducer from './slice/authSlice';
-import productReducer from './slice/ProductSlice';
+import {createStore,applyMiddleware,combineReducers} from 'redux'
+import { composeWithDevTools } from "redux-devtools-extension"
+import {userReducer} from './reducers/userReducer';
+
 
 const rootReducer = combineReducers({
-    auth:authReducer,
-    product: productReducer,
+    user:userReducer,
+
 })
 
-const store = configureStore({
- reducer:rootReducer
-})
+const store = createStore(
+ rootReducer,
+ composeWithDevTools()
+)
 
 export default store

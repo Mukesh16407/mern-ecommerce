@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./auth.css";
+import { useDispatch, useSelector } from "react-redux";
 import loginImg from "../../assets/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -21,6 +22,7 @@ const createOrUpdateUser = async(authtoken)=>{
 
 export const Login = () => {
   const navigate = useNavigate();
+ const dispatch = useDispatch()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +38,12 @@ export const Login = () => {
         const user = userCredential.user;
         
         //console.log(user.accessToken,"user");
-       user.getIdToken(/* forceRefresh */ true).then((idToken)=>createOrUpdateUser(idToken)).catch((error)=>console.log("error",error))
+       user.getIdToken(/* forceRefresh */ true).then((idToken)=>
+       createOrUpdateUser(idToken)).then((res)=>{
+        
+       })
+       .catch(()=>console.log("Error"))
+       .catch((error)=>console.log("error",error))
         
         
         setIsLoading(false);
