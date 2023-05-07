@@ -5,72 +5,102 @@ import loginImg from "../../assets/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Card } from "../../Components/card/Card";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Loader } from "../../Components/loader/Loader";
-import axios from 'axios';
+import axios from "axios";
+import { setActiveUser } from "../../redux/action/userAction";
 
-const createOrUpdateUser = async(authtoken)=>{
-  debugger
-  return await axios.post(`${process.env.REACT_APP_API}/create-or-update-user`,{},{
-    headers:{
-      authtoken,
+const createOrUpdateUser = async (authtoken) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/create-or-update-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
     }
-  })
-}
+  );
+};
 
 export const Login = () => {
   const navigate = useNavigate();
- const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        
-        //console.log(user.accessToken,"user");
-       user.getIdToken(/* forceRefresh */ true).then((idToken)=>
-       createOrUpdateUser(idToken)).then((res)=>{
-        
-       })
-       .catch(()=>console.log("Error"))
-       .catch((error)=>console.log("error",error))
-        
-        
-        setIsLoading(false);
-        toast.success("User Sign Successfully");
-        navigate("/");
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        toast.error(error.message);
-      });
+    try {
+      setIsLoading(true);
+      const result = await signInWithEmailAndPassword(auth, email, password);
+
+      const { user } = result;
+      const idTokenResult = await user.getIdTokenResult();
+
+      const getUserData = {
+        email: user.email,
+        token: idTokenResult.token,
+      };
+      dispatch(setActiveUser(getUserData));
+      setIsLoading(false);
+      toast.success("User Sign Successfully");
+      navigate("/");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
+
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+
+    //     //console.log(user.accessToken,"user");
+    //     user
+    //       .getIdToken(/* forceRefresh */ true)
+    //       .then((idToken) => createOrUpdateUser(idToken))
+    //       .then((res) => {})
+    //       .catch((error) => console.log("error", error));
+
+    //     setIsLoading(false);
+    //     toast.success("User Sign Successfully");
+    //     navigate("/");
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //     toast.error(error.message);
+    //   });
   };
 
   //login with google
   const provider = new GoogleAuthProvider();
 
-  const loginWithGoogle=()=>{
-
+  const loginWithGoogle = async () => {
     signInWithPopup(auth, provider)
-  .then((result) => {
-    const user = result.user;
-     toast.success("Login with Google Successful Done")
-     navigate("/")
-    
-  }).catch((error) => {
-    toast.error(error.message)
-  });
-  }
+      .then(async (result) => {
+        const { user } = result;
+        const idTokenResult = await user.getIdTokenResult();
+
+        const getUserData = {
+          email: user.email,
+          token: idTokenResult.token,
+        };
+        dispatch(setActiveUser(getUserData));
+        toast.success("Login with Google Successful Done");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <>
       {isLoading && <Loader />}
@@ -86,25 +116,30 @@ export const Login = () => {
                 type="text"
                 placeholder="Email"
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <button className="--btn --btn-block --btn-primary" type="submit">
                 Login
               </button>
               <div className="links">
-                <Link to={"/reset"} style={{color:"black"}}>Reset Password</Link>
+                <Link to={"/reset"} style={{ color: "black" }}>
+                  Reset Password
+                </Link>
               </div>
               <p style={{ color: "black" }}>--or--</p>
             </form>
-            <button className="--btn --btn-block --btn-danger" onClick={loginWithGoogle}>
+            <button
+              className="--btn --btn-block --btn-danger"
+              onClick={loginWithGoogle}
+            >
               <GoogleIcon style={{ marginRight: "5px" }} /> Login With Google
             </button>
             <span className="register">

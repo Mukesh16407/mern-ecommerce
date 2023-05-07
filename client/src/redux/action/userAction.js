@@ -1,11 +1,9 @@
-import {LOGGED_IN_USER,LOGOUT_USER} from '../actionType/actionType'
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "../actionType/actionType";
 
+export function setActiveUser(user) {
+  return { type: SET_ACTIVE_USER, payload: user };
+}
 
-export const loginUser=(payload)=>({
-    type:LOGGED_IN_USER,
-    payload
-})
-export const logOutUser=()=>({
-    type:LOGOUT_USER, 
-})
- 
+export function removeActiveUser() {
+  return { type: REMOVE_ACTIVE_USER };
+}

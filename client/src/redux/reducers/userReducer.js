@@ -1,19 +1,24 @@
-import {LOGGED_IN_USER,LOGOUT_USER} from '../actionType/actionType'
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "../actionType/actionType";
 
 const initialState = {
-    isLoggedIn: false,
-    email: null,
-    userName: null,
-    userID: null,
-  };
-export function userReducer(state=initialState,action){
-
-    switch(action.type){
-        case LOGGED_IN_USER:
-        return action.payload;
-        case LOGOUT_USER:
-            return action.payload;
-        default:
-            return state;
+  user: null,
+};
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_ACTIVE_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
     }
-}
+    case REMOVE_ACTIVE_USER: {
+      return {
+        ...state,
+        user: null,
+      };
+    }
+    default:
+      return state;
+  }
+};
+export default authReducer;

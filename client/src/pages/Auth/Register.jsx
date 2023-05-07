@@ -70,6 +70,9 @@ export const Register = () => {
           console.log(user);
           setIsLoading(false);
           toast.success("Register Sussessful");
+          //save user email in local storage
+          //window.localStorage.setItem('emailForRegistration',email)
+        
           navigate("/login");
         })
         .catch((error) => {
