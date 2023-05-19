@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "../../Components/card/Card";
 import registeImg from "../../assets/register.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,10 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Loader } from "../../Components/loader/Loader";
+import { useSelector } from "react-redux";
 
 export const Register = () => {
   const navigate = useNavigate();
-
+  const currentUser = useSelector((state) => state.auth.user);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -72,7 +73,7 @@ export const Register = () => {
           toast.success("Register Sussessful");
           //save user email in local storage
           //window.localStorage.setItem('emailForRegistration',email)
-        
+
           navigate("/login");
         })
         .catch((error) => {
@@ -81,9 +82,14 @@ export const Register = () => {
         });
     }
   };
+  useEffect(() => {
+    if (currentUser && currentUser.token) {
+      navigate("/");
+    }
+  }, [currentUser]);
   return (
     <>
-    {isLoading && <Loader/>}
+      {isLoading && <Loader />}
       <section className="container auth">
         <Card>
           <div className="form">
@@ -114,13 +120,10 @@ export const Register = () => {
                 REGISTER
               </button>
               <span className="register">
-                <p style={{color:"black"}}>Already have an Account?</p>
-                <Link to={"/login"} >
-                  Login
-                </Link>
+                <p style={{ color: "black" }}>Already have an Account?</p>
+                <Link to={"/login"}>Login</Link>
               </span>
             </form>
-           
           </div>
         </Card>
         <div className="img">

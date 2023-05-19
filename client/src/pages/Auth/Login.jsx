@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./auth.css";
 import { useDispatch, useSelector } from "react-redux";
 import loginImg from "../../assets/login.png";
@@ -13,20 +13,9 @@ import {
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Loader } from "../../Components/loader/Loader";
-import axios from "axios";
-import { setActiveUser } from "../../redux/action/userAction";
 
-const createOrUpdateUser = async (authtoken) => {
-  return await axios.post(
-    `${process.env.REACT_APP_API}/create-or-update-user`,
-    {},
-    {
-      headers: {
-        authtoken,
-      },
-    }
-  );
-};
+import { setActiveUser } from "../../redux/action/userAction";
+import { createOrUpdateUser } from "../../functions/auth";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -35,6 +24,8 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const currentUser = useSelector((state) => state.auth.user);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -46,11 +37,22 @@ export const Login = () => {
       const { user } = result;
       const idTokenResult = await user.getIdTokenResult();
 
-      const getUserData = {
-        email: user.email,
-        token: idTokenResult.token,
-      };
-      dispatch(setActiveUser(getUserData));
+      user
+        .getIdToken(/* forceRefresh */ true)
+        .then((idToken) => createOrUpdateUser(idToken))
+        .then((res) => {
+          const getUserData = {
+            name: res.data.name,
+            email: res.data.email,
+            token: idTokenResult.token,
+            role: res.data.role,
+            _id: res.data._id,
+          };
+
+          dispatch(setActiveUser(getUserData));
+        })
+        .catch((error) => console.log("error", error));
+
       setIsLoading(false);
       toast.success("User Sign Successfully");
       navigate("/");
@@ -59,25 +61,25 @@ export const Login = () => {
       toast.error(error.message);
     }
 
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
+    //   signInWithEmailAndPassword(auth, email, password)
+    //     .then((userCredential) => {
+    //       const user = userCredential.user;
 
-    //     //console.log(user.accessToken,"user");
-    //     user
-    //       .getIdToken(/* forceRefresh */ true)
-    //       .then((idToken) => createOrUpdateUser(idToken))
-    //       .then((res) => {})
-    //       .catch((error) => console.log("error", error));
+    //       //console.log(user.accessToken,"user");
+    //       user
+    //         .getIdToken(/* forceRefresh */ true)
+    //         .then((idToken) => createOrUpdateUser(idToken))
+    //         .then((res) => {})
+    //         .catch((error) => console.log("error", error));
 
-    //     setIsLoading(false);
-    //     toast.success("User Sign Successfully");
-    //     navigate("/");
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //     toast.error(error.message);
-    //   });
+    //       setIsLoading(false);
+    //       toast.success("User Sign Successfully");
+    //       navigate("/");
+    //     })
+    //     .catch((error) => {
+    //       setIsLoading(false);
+    //       toast.error(error.message);
+    //     });
   };
 
   //login with google
@@ -89,11 +91,21 @@ export const Login = () => {
         const { user } = result;
         const idTokenResult = await user.getIdTokenResult();
 
-        const getUserData = {
-          email: user.email,
-          token: idTokenResult.token,
-        };
-        dispatch(setActiveUser(getUserData));
+        user
+          .getIdToken(/* forceRefresh */ true)
+          .then((idToken) => createOrUpdateUser(idToken))
+          .then((res) => {
+            const getUserData = {
+              name: res.data.name,
+              email: res.data.email,
+              token: idTokenResult.token,
+              role: res.data.role,
+              _id: res.data._id,
+            };
+
+            dispatch(setActiveUser(getUserData));
+          })
+          .catch((error) => console.log("error", error));
         toast.success("Login with Google Successful Done");
         navigate("/");
       })
@@ -101,6 +113,13 @@ export const Login = () => {
         toast.error(error.message);
       });
   };
+
+  useEffect(() => {
+    debugger;
+    if (currentUser && currentUser.token) {
+      navigate("/");
+    }
+  }, [currentUser]);
   return (
     <>
       {isLoading && <Loader />}
