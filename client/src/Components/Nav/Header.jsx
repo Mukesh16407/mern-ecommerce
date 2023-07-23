@@ -14,7 +14,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import { createOrUpdateUser } from "../../functions/auth";
+import { postCurrentUser } from "../../functions/auth";
 
 const { SubMenu, Item } = Menu;
 
@@ -43,7 +43,7 @@ export const Header = () => {
         const idTokenResult = await user.getIdTokenResult();
         user
           .getIdToken(/* forceRefresh */ true)
-          .then((idToken) => createOrUpdateUser(idToken))
+          .then((idToken) => postCurrentUser(idToken))
           .then((res) => {
             const getUserData = {
               name: res.data.name,

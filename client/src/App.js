@@ -8,6 +8,7 @@ import { Reset } from "./pages/Auth/Reset";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { History } from "./pages/Users/History";
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
         <ToastContainer />
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/user/history" element={<History />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   );

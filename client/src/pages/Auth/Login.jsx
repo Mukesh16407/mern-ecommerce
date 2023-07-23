@@ -27,6 +27,15 @@ export const Login = () => {
 
   const currentUser = useSelector((state) => state.auth.user);
 
+  const roleBaseRedirect = (req) => {
+    debugger;
+    if (req.data.role === "admin") {
+      navigate("/admin/dashboard");
+    } else {
+      navigate("/user/dashboard");
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -50,12 +59,12 @@ export const Login = () => {
           };
 
           dispatch(setActiveUser(getUserData));
+          roleBaseRedirect(res);
         })
         .catch((error) => console.log("error", error));
 
       setIsLoading(false);
       toast.success("User Sign Successfully");
-      navigate("/");
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);
@@ -104,10 +113,10 @@ export const Login = () => {
             };
 
             dispatch(setActiveUser(getUserData));
+            roleBaseRedirect(res);
           })
           .catch((error) => console.log("error", error));
         toast.success("Login with Google Successful Done");
-        navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -115,7 +124,6 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    debugger;
     if (currentUser && currentUser.token) {
       navigate("/");
     }

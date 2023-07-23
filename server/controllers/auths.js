@@ -22,3 +22,13 @@ exports.createOrUpdateUsers = async (req, res) => {
     res.json(newUser);
   }
 };
+
+exports.currentUsers = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.user.email }).exec();
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
