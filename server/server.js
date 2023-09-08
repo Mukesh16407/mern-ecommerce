@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dbConfig = require("./config/db.Config");
 require("dotenv").config();
-const fs = require("fs");
+//const fs = require("fs");
+const { readdirSync } = require("fs");
 
 //import routes
 
@@ -19,7 +20,7 @@ app.use(cors());
 
 //route middleware
 
-fs.readdirSync("./routes").map((route) =>
+readdirSync("./routes").map((route) =>
   app.use("/api", require("./routes/" + route))
 );
 

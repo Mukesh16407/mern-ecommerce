@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       index: true,
+      // when we want to perform such actions,
+      //it is better to have the index property.
+      //So that will allow us to query the database more
+      // efficiently when we have the index set to true.
     },
     role: {
       type: String,

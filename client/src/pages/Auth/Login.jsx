@@ -28,7 +28,6 @@ export const Login = () => {
   const currentUser = useSelector((state) => state.auth.user);
 
   const roleBaseRedirect = (req) => {
-    debugger;
     if (req.data.role === "admin") {
       navigate("/admin/dashboard");
     } else {
