@@ -31,7 +31,7 @@ export const Login = () => {
     if (req.data.role === "admin") {
       navigate("/admin/dashboard");
     } else {
-      navigate("/user/dashboard");
+      navigate("/user/history");
     }
   };
 
@@ -56,7 +56,7 @@ export const Login = () => {
             role: res.data.role,
             _id: res.data._id,
           };
-
+          console.log("CREATE AND UPDATE", res);
           dispatch(setActiveUser(getUserData));
           roleBaseRedirect(res);
         })
