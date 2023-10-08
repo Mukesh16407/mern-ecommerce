@@ -5,7 +5,6 @@ import LoadingToRedirect from "./LoadingToRedirect";
 
 const ProtectedRoute = ({ children, ...rest }) => {
   const { user } = useSelector((state) => state.auth);
-  console.log(rest);
 
   return user && user.token ? <Route {...rest} /> : <LoadingToRedirect />;
 };

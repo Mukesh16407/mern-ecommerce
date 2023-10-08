@@ -11,7 +11,8 @@ import History from "./pages/user/History";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/WatchList";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute";
-import { Admin } from "./pages/Admin/Admin";
+import { AdminDashBoard } from "./pages/Admin/AdminDashBoard";
+import AdminRoute from "./Components/Routes/AdminRoute";
 
 function App() {
   return (
@@ -31,14 +32,16 @@ function App() {
             <Route path="password" element={<Password />} />
             <Route path="wishlist" element={<Wishlist />} />
           </Route>
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/admin">
+            <Route
+              path="dashboard"
+              element={
+                <AdminRoute>
+                  <AdminDashBoard />
+                </AdminRoute>
+              }
+            />
+          </Route>
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
