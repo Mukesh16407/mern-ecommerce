@@ -11,8 +11,9 @@ import History from "./pages/user/History";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/WatchList";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute";
-import { AdminDashBoard } from "./pages/Admin/AdminDashBoard";
+import AdminDashBoard from "./pages/Admin/AdminDashBoard";
 import AdminRoute from "./Components/Routes/AdminRoute";
+import CategoryCreate from "./pages/Admin/category/CategoryCreate";
 
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
               element={
                 <AdminRoute>
                   <AdminDashBoard />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="category"
+              element={
+                <AdminRoute>
+                  <CategoryCreate />
                 </AdminRoute>
               }
             />

@@ -115,12 +115,21 @@ export const Header = () => {
         {currentUser && (
           <SubMenu
             icon={<SettingOutlined />}
-            key="setting"
             title={currentUser.email && currentUser.email.split("@")[0]}
             className="float-right"
           >
-            <Item key="setting:1">Option 1</Item>
-            <Item key="setting:2">Option 2</Item>
+            {currentUser && currentUser.role === "subscriber" && (
+              <Item>
+                <Link to="/user/history">Dashboard</Link>
+              </Item>
+            )}
+
+            {currentUser && currentUser.role === "admin" && (
+              <Item>
+                <Link to="/admin/dashboard">Dashboard</Link>
+              </Item>
+            )}
+
             <Item icon={<LogoutOutlined />} onClick={handleLogout}>
               Logout
             </Item>
