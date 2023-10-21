@@ -14,6 +14,7 @@ import ProtectedRoute from "./Components/Routes/ProtectedRoute";
 import AdminDashBoard from "./pages/Admin/AdminDashBoard";
 import AdminRoute from "./Components/Routes/AdminRoute";
 import CategoryCreate from "./pages/Admin/category/CategoryCreate";
+import CategoryUpdate from "./pages/Admin/category/CategoryUpdate";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
               element={
                 <AdminRoute>
                   <CategoryCreate />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="category/:slug"
+              element={
+                <AdminRoute>
+                  <CategoryUpdate />
                 </AdminRoute>
               }
             />
