@@ -15,6 +15,9 @@ import AdminDashBoard from "./pages/Admin/AdminDashBoard";
 import AdminRoute from "./Components/Routes/AdminRoute";
 import CategoryCreate from "./pages/Admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/Admin/category/CategoryUpdate";
+import SubCreate from "./pages/Admin/sub/SubCreate";
+import SubUpdate from "./pages/Admin/sub/SubUpdate";
+import { ProductCreate } from "./pages/Admin/product/ProductCreate";
 
 function App() {
   return (
@@ -56,6 +59,30 @@ function App() {
               element={
                 <AdminRoute>
                   <CategoryUpdate />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/sub"
+              element={
+                <AdminRoute>
+                  <SubCreate />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/sub/:slug"
+              element={
+                <AdminRoute>
+                  <SubUpdate />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/product"
+              element={
+                <AdminRoute>
+                  <ProductCreate />
                 </AdminRoute>
               }
             />
