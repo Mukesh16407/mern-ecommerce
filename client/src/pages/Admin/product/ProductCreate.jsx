@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNav from "../../../Components/Nav/AdminNav";
 import ProductCreateForm from "../../../Components/form/ProductCreateForm";
 import { createProduct } from "../../../functions/product";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import { getCategories, getCategorySubs } from "../../../functions/category";
 const initialState = {
   title: "Macbook Pro",
   description: "This is the best Apple product",
@@ -23,7 +23,17 @@ const initialState = {
 
 export const ProductCreate = () => {
   const [values, setValues] = useState(initialState);
+  const [subOptions, setSubOptions] = useState([]);
+  const [showSub, setShowSub] = useState(false);
+
   const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  const loadCategories = () =>
+    getCategories().then((c) => setValues({ ...values, categories: c.data }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +54,17 @@ export const ProductCreate = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
     // console.log(e.target.name, " ----- ", e.target.value);
   };
+
+  const handleCatagoryChange = (e) => {
+    e.preventDefault();
+    console.log("CLICKED CATEGORY", e.target.value);
+    setValues({ ...values, subs: [], category: e.target.value });
+    getCategorySubs(e.target.value).then((res) => {
+      console.log("SUB OPTIONS ON CATGORY CLICK", res);
+      setSubOptions(res.data);
+    });
+    setShowSub(true);
+  };
   return (
     <div className="container-fluid">
       <div className="row">
@@ -59,6 +80,9 @@ export const ProductCreate = () => {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             values={values}
+            handleCatagoryChange={handleCatagoryChange}
+            subOptions={subOptions}
+            showSub={showSub}
           />
         </div>
       </div>

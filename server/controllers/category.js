@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const Sub = require("../models/sub");
 const slugify = require("slugify");
 
 exports.create = async (req, res) => {
@@ -46,5 +47,22 @@ exports.remove = async (req, res) => {
     res.json(deleted);
   } catch (err) {
     res.status(400).send("Create delete failed");
+  }
+};
+
+// exports.getSubs = (req, res) => {
+//   Sub.find({ parent: req.params._id }).exec((err, subs) => {
+//     if (err) console.log(err);
+//     res.json(subs);
+//   });
+// };
+
+exports.getSubs = async (req, res) => {
+  try {
+    const subs = await Sub.find({ parent: req.params._id }).exec();
+    res.json(subs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "An error occurred while fetching subs" });
   }
 };
