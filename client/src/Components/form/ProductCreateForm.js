@@ -133,12 +133,13 @@ const ProductCreateForm = ({
           <Select
             mode="multiple"
             style={{ width: "100%" }}
+            allowClear
             placeholder="Please select"
             value={subs}
             onChange={(value) => setValues({ ...values, subs: value })}
           >
             {subOptions.length &&
-              subOptions.map((s) => (
+              subOptions?.map((s) => (
                 <Option key={s._id} value={s._id}>
                   {s.name}
                 </Option>
