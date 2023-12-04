@@ -18,6 +18,7 @@ import CategoryUpdate from "./pages/Admin/category/CategoryUpdate";
 import SubCreate from "./pages/Admin/sub/SubCreate";
 import SubUpdate from "./pages/Admin/sub/SubUpdate";
 import { ProductCreate } from "./pages/Admin/product/ProductCreate";
+import AllProducts from "./pages/Admin/product/AllProducts";
 
 function App() {
   return (
@@ -87,6 +88,14 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path="/admin/products"
+            element={
+              <AdminRoute>
+                <AllProducts />
+              </AdminRoute>
+            }
+          />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
