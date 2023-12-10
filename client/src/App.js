@@ -19,6 +19,7 @@ import SubCreate from "./pages/Admin/sub/SubCreate";
 import SubUpdate from "./pages/Admin/sub/SubUpdate";
 import { ProductCreate } from "./pages/Admin/product/ProductCreate";
 import AllProducts from "./pages/Admin/product/AllProducts";
+import ProductUpdate from "./pages/Admin/product/ProductUpdate";
 
 function App() {
   return (
@@ -93,6 +94,14 @@ function App() {
             element={
               <AdminRoute>
                 <AllProducts />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/product/:slug"
+            element={
+              <AdminRoute>
+                <ProductUpdate />
               </AdminRoute>
             }
           />
