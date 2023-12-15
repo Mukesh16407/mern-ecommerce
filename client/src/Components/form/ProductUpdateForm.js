@@ -8,13 +8,18 @@ const ProductUpdateForm = ({
   handleChange,
   setValues,
   values,
+  handleCategoryChange,
+  categories,
+  subOptions,
+  arrayOfSubs,
+  setArrayOfSubs,
+  selectedCategory,
 }) => {
   // destructure
   const {
     title,
     description,
     price,
-    categories,
     category,
     subs,
     shipping,
@@ -65,6 +70,7 @@ const ProductUpdateForm = ({
         <label>Shipping</label>
         <select
           name="shipping"
+          value={shipping === "Yes" ? "Yes" : "No"}
           className="form-control"
           onChange={handleChange}
         >
@@ -87,7 +93,12 @@ const ProductUpdateForm = ({
 
       <div className="form-group">
         <label>Color</label>
-        <select name="color" className="form-control" onChange={handleChange}>
+        <select
+          name="color"
+          value={color}
+          className="form-control"
+          onChange={handleChange}
+        >
           <option>Please select</option>
           {colors.map((c) => (
             <option key={c} value={c}>
@@ -99,7 +110,12 @@ const ProductUpdateForm = ({
 
       <div className="form-group">
         <label>Brand</label>
-        <select name="brand" className="form-control" onChange={handleChange}>
+        <select
+          name="brand"
+          value={brand}
+          className="form-control"
+          onChange={handleChange}
+        >
           <option>Please select</option>
           {brands.map((b) => (
             <option key={b} value={b}>
@@ -108,7 +124,39 @@ const ProductUpdateForm = ({
           ))}
         </select>
       </div>
-
+      <div className="form-group">
+        <label>Category</label>
+        <select
+          name="category"
+          value={selectedCategory ? selectedCategory : category._id}
+          className="form-control"
+          onChange={handleCategoryChange}
+        >
+          {categories.length > 0 &&
+            categories.map((c) => (
+              <option key={c._id} value={c._id}>
+                {c.name}
+              </option>
+            ))}
+        </select>
+      </div>
+      <div>
+        <label>Sub Categories</label>
+        <Select
+          mode="multiple"
+          style={{ width: "100%" }}
+          placeholder="Please select"
+          value={arrayOfSubs}
+          onChange={(value) => setArrayOfSubs(value)}
+        >
+          {subOptions.length &&
+            subOptions.map((s) => (
+              <Option key={s._id} value={s._id}>
+                {s.name}
+              </Option>
+            ))}
+        </Select>
+      </div>
       <br />
       <button className="btn btn-outline-info">Save</button>
     </form>
