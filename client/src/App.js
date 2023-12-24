@@ -20,6 +20,7 @@ import SubUpdate from "./pages/Admin/sub/SubUpdate";
 import { ProductCreate } from "./pages/Admin/product/ProductCreate";
 import AllProducts from "./pages/Admin/product/AllProducts";
 import ProductUpdate from "./pages/Admin/product/ProductUpdate";
+import Product from "./pages/Home/Product";
 
 function App() {
   return (
@@ -105,6 +106,7 @@ function App() {
               </AdminRoute>
             }
           />
+          <Route path="/product/:slug" element={<Product />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
