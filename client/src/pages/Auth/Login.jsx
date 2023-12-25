@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./auth.css";
 import { useDispatch, useSelector } from "react-redux";
 import loginImg from "../../assets/login.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Card } from "../../Components/card/Card";
 import {
@@ -20,6 +20,7 @@ import { createOrUpdateUser } from "../../functions/auth";
 export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,10 +29,16 @@ export const Login = () => {
   const currentUser = useSelector((state) => state.auth.user);
 
   const roleBaseRedirect = (req) => {
-    if (req.data.role === "admin") {
-      navigate("/admin/dashboard");
+    let intended = location.state;
+
+    if (intended) {
+      navigate(intended.from);
     } else {
-      navigate("/user/history");
+      if (req.data.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/history");
+      }
     }
   };
 
@@ -123,10 +130,15 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (currentUser && currentUser.token) {
-      navigate("/");
+    let intended = location.state;
+    if (intended) {
+      return;
+    } else {
+      if (currentUser && currentUser.token) {
+        navigate("/");
+      }
     }
-  }, [currentUser]);
+  }, [currentUser, location.state]);
   return (
     <>
       {isLoading && <Loader />}
