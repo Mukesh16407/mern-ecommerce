@@ -8,6 +8,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
 import { ProductItem } from "../ProductItem/ProductItem";
 import Search from "../../Search/Search";
+import { showAverage } from "../../../functions/rating";
 
 const { Meta } = Card;
 
@@ -43,28 +44,35 @@ export const ProductList = ({ product }) => {
     //     </div>
     //   </div>
     // </div>
-    <Card
-      cover={
-        <img
-          src={images && images.length ? images[0].url : laptop}
-          style={{ height: "150px", objectFit: "cover" }}
-          className="p-1"
-          alt="coverimg"
+    <>
+      {product && product.ratings && product.ratings.length > 0 ? (
+        showAverage(product)
+      ) : (
+        <div className="text-center pt-1 pb-3">No rating yet</div>
+      )}
+      <Card
+        cover={
+          <img
+            src={images && images.length ? images[0].url : laptop}
+            style={{ height: "150px", objectFit: "cover" }}
+            className="p-1"
+            alt="coverimg"
+          />
+        }
+        actions={[
+          <Link to={`/product/${slug}`}>
+            <EyeOutlined className="text-warning" /> <br /> View Product
+          </Link>,
+          <>
+            <ShoppingCartOutlined className="text-danger" /> <br /> Add to Cart
+          </>,
+        ]}
+      >
+        <Meta
+          title={title}
+          description={`${description && description.substring(0, 40)}...`}
         />
-      }
-      actions={[
-        <Link to={`/product/${slug}`}>
-          <EyeOutlined className="text-warning" /> <br /> View Product
-        </Link>,
-        <>
-          <ShoppingCartOutlined className="text-danger" /> <br /> Add to Cart
-        </>,
-      ]}
-    >
-      <Meta
-        title={title}
-        description={`${description && description.substring(0, 40)}...`}
-      />
-    </Card>
+      </Card>
+    </>
   );
 };

@@ -21,6 +21,7 @@ import { ProductCreate } from "./pages/Admin/product/ProductCreate";
 import AllProducts from "./pages/Admin/product/AllProducts";
 import ProductUpdate from "./pages/Admin/product/ProductUpdate";
 import Product from "./pages/Home/Product";
+import CategoryHome from "./pages/category/CategoryHome";
 
 function App() {
   return (
@@ -107,6 +108,7 @@ function App() {
             }
           />
           <Route path="/product/:slug" element={<Product />} />
+          <Route path="/category/:slug" element={<CategoryHome />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
