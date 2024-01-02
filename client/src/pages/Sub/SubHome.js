@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getCategory } from "../../functions/category";
+import { getSub } from "../../functions/sub";
 import { useParams } from "react-router-dom";
 import { ProductList } from "../../Components/Product/ProductList/ProductList";
 
-const CategoryHome = () => {
-  const [category, setCategory] = useState({});
+const SubCategoryHome = () => {
+  const [subCategory, setSubCategory] = useState({});
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -12,9 +12,9 @@ const CategoryHome = () => {
 
   useEffect(() => {
     setLoading(true);
-    getCategory(slug).then((res) => {
+    getSub(slug).then((res) => {
       console.log(JSON.stringify(res.data, null, 4));
-      setCategory(res.data);
+      setSubCategory(res.data);
       setProducts(res.data.products);
       setLoading(false);
     });
@@ -30,8 +30,8 @@ const CategoryHome = () => {
             </h4>
           ) : (
             <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-              {products.length} Products in "{category?.category?.name}"
-              category
+              {products.length} Products in "{subCategory?.sub?.name}"
+              SubCategory
             </h4>
           )}
         </div>
@@ -48,4 +48,4 @@ const CategoryHome = () => {
   );
 };
 
-export default CategoryHome;
+export default SubCategoryHome;

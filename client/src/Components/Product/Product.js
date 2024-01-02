@@ -4,6 +4,7 @@ import Jumbotron from "../card/Jumbotron";
 import NewArrivals from "../home/NewArrivals";
 import BestSellers from "../home/BestSellers";
 import CategoryList from "../category/CategoryList";
+import SubCategoryList from "../sub/SubList";
 
 export const Product = () => {
   // useEffect(()=>{
@@ -30,6 +31,10 @@ export const Product = () => {
         Categories
       </h4>
       <CategoryList />
+      <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
+        Sub Categories
+      </h4>
+      <SubCategoryList />
     </>
     // <section>
     //   <div>
