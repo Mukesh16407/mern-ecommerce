@@ -23,6 +23,7 @@ import ProductUpdate from "./pages/Admin/product/ProductUpdate";
 import Product from "./pages/Home/Product";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubCategoryHome from "./pages/Sub/SubHome";
+import Shop from "./pages/Shop";
 
 function App() {
   return (
@@ -111,6 +112,7 @@ function App() {
           <Route path="/product/:slug" element={<Product />} />
           <Route path="/category/:slug" element={<CategoryHome />} />
           <Route path="/sub/:slug" element={<SubCategoryHome />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

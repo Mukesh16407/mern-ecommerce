@@ -1,4 +1,4 @@
-import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "../actionType/actionType";
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "./ActionType";
 
 export function setActiveUser(user) {
   return { type: SET_ACTIVE_USER, payload: user };

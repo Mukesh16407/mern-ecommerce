@@ -14,8 +14,8 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Loader } from "../../Components/loader/Loader";
 
-import { setActiveUser } from "../../redux/action/userAction";
 import { createOrUpdateUser } from "../../functions/auth";
+import { setActiveUser } from "../../redux/auth/Action";
 
 export const Login = () => {
   const navigate = useNavigate();

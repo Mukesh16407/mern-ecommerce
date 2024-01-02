@@ -4,17 +4,18 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setActiveUser } from "../../redux/action/userAction";
-
+import { postCurrentUser } from "../../functions/auth";
+import { setActiveUser } from "../../redux/auth/Action";
 import {
   AppstoreOutlined,
   SettingOutlined,
   UserOutlined,
   UserAddOutlined,
   LogoutOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import { postCurrentUser } from "../../functions/auth";
+import Search from "../form/Search";
 
 const { SubMenu, Item } = Menu;
 
@@ -95,6 +96,9 @@ export const Header = () => {
         <Item key="home" icon={<AppstoreOutlined />}>
           <Link to="/">Home</Link>
         </Item>
+        <Item key="shop" icon={<ShoppingOutlined />}>
+          <Link to="/shop">Shop</Link>
+        </Item>
 
         {!currentUser && (
           <Item
@@ -135,6 +139,9 @@ export const Header = () => {
             </Item>
           </SubMenu>
         )}
+        <span className="float-right p-1">
+          <Search />
+        </span>
       </Menu>
     </>
   );
