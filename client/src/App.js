@@ -24,6 +24,7 @@ import Product from "./pages/Home/Product";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubCategoryHome from "./pages/Sub/SubHome";
 import Shop from "./pages/Shop";
+import { Cart } from "./pages/Cart/Cart";
 
 function App() {
   return (
@@ -113,6 +114,7 @@ function App() {
           <Route path="/category/:slug" element={<CategoryHome />} />
           <Route path="/sub/:slug" element={<SubCategoryHome />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

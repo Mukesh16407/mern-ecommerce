@@ -30,6 +30,7 @@ export const Login = () => {
 
   const roleBaseRedirect = (req) => {
     let intended = location.state;
+    console.log(intended, "intended");
 
     if (intended) {
       navigate(intended.from);
@@ -42,6 +43,16 @@ export const Login = () => {
     }
   };
 
+  useEffect(() => {
+    let intended = location.state;
+    if (intended) {
+      return;
+    } else {
+      if (currentUser && currentUser.token) {
+        navigate("/");
+      }
+    }
+  }, [currentUser, location.state]);
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -129,16 +140,6 @@ export const Login = () => {
       });
   };
 
-  useEffect(() => {
-    let intended = location.state;
-    if (intended) {
-      return;
-    } else {
-      if (currentUser && currentUser.token) {
-        navigate("/");
-      }
-    }
-  }, [currentUser, location.state]);
   return (
     <>
       {isLoading && <Loader />}

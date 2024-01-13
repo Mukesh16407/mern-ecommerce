@@ -13,8 +13,9 @@ import {
   UserAddOutlined,
   LogoutOutlined,
   ShoppingOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, Badge } from "antd";
 import Search from "../form/Search";
 
 const { SubMenu, Item } = Menu;
@@ -26,6 +27,8 @@ export const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  let { cart } = useSelector((state) => ({ ...state }));
   //const [displayName, setdisplayName] = useState("");
 
   const handleClick = (e) => {
@@ -98,6 +101,13 @@ export const Header = () => {
         </Item>
         <Item key="shop" icon={<ShoppingOutlined />}>
           <Link to="/shop">Shop</Link>
+        </Item>
+        <Item key="cart" icon={<ShoppingCartOutlined />}>
+          <Link to="/cart">
+            <Badge count={cart.length} offset={[9, 0]}>
+              Cart
+            </Badge>
+          </Link>
         </Item>
 
         {!currentUser && (
