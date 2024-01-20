@@ -11,7 +11,7 @@ import Search from "../../Search/Search";
 import { showAverage } from "../../../functions/rating";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/cart/Action";
+import { addToCart, setDrawerVisible } from "../../../redux/cart/Action";
 
 const { Meta } = Card;
 
@@ -43,6 +43,7 @@ export const ProductList = ({ product }) => {
       dispatch(addToCart(unique));
       // show tooltip
       setTooltip("Added");
+      dispatch(setDrawerVisible(true));
     }
   };
   return (

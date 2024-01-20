@@ -25,6 +25,7 @@ import CategoryHome from "./pages/category/CategoryHome";
 import SubCategoryHome from "./pages/Sub/SubHome";
 import Shop from "./pages/Shop";
 import { Cart } from "./pages/Cart/Cart";
+import { SideDrawer } from "./Components/drawer/SideDrawer";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <BrowserRouter>
         <ToastContainer />
         <Header />
+        <SideDrawer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
