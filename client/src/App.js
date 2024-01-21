@@ -26,6 +26,7 @@ import SubCategoryHome from "./pages/Sub/SubHome";
 import Shop from "./pages/Shop";
 import { Cart } from "./pages/Cart/Cart";
 import { SideDrawer } from "./Components/drawer/SideDrawer";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -117,6 +118,7 @@ function App() {
           <Route path="/sub/:slug" element={<SubCategoryHome />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

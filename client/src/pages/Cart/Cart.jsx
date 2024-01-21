@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductCardInCheckout from "../../Components/card/ProductCardInCheckout";
+import { userCart } from "../../functions/user";
 
 export const Cart = () => {
-  const { cart, user } = useSelector((state) => ({ ...state }));
+  const { cart } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const getTotal = () => {
     return cart.reduce((currentValue, nextValue) => {
       return currentValue + nextValue.count * nextValue.price;
@@ -14,6 +16,12 @@ export const Cart = () => {
   };
   const saveOrderToDb = () => {
     //
+    userCart(cart, user.token)
+      .then((res) => {
+        console.log("CART POST RES", res);
+        if (res.data.ok) navigate("/checkout");
+      })
+      .catch((err) => console.log("cart save err", err));
   };
 
   const showCartItems = () => (
@@ -67,7 +75,7 @@ export const Cart = () => {
           {user ? (
             <button
               onClick={saveOrderToDb}
-              className="btn btn-sm btn-primary mt-2"
+              className="btn  btn-primary mt-2"
               disabled={!cart.length}
             >
               Proceed to Checkout
