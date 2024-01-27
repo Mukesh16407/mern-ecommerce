@@ -8,7 +8,7 @@ import { setDrawerVisible } from "../../redux/cart/Action";
 export const SideDrawer = () => {
   const dispatch = useDispatch();
   const { drawer, cart } = useSelector((state) => ({ ...state }));
-  console.log(drawer);
+
   const imageStyle = {
     width: "100%",
     height: "50px",

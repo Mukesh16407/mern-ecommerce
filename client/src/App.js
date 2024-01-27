@@ -27,10 +27,23 @@ import Shop from "./pages/Shop";
 import { Cart } from "./pages/Cart/Cart";
 import { SideDrawer } from "./Components/drawer/SideDrawer";
 import Checkout from "./pages/checkout/Checkout";
+import { CreateCouponPage } from "./pages/Admin/coupon/CreateCouponPage";
+import { Notification } from "./Components/modal/Notification";
+import { useNetworkState } from "./hooks/useNetwork";
 
 function App() {
+  const { isOnLine } = useNetworkState();
+  console.log(isOnLine, "id");
   return (
     <div>
+      {!isOnLine ? (
+        <Notification
+          titleText="You are currently offline"
+          messageText={
+            "An internet connection is required to use this app. please check your connection."
+          }
+        />
+      ) : null}
       <BrowserRouter>
         <ToastContainer />
         <Header />
@@ -110,6 +123,14 @@ function App() {
             element={
               <AdminRoute>
                 <ProductUpdate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/coupon"
+            element={
+              <AdminRoute>
+                <CreateCouponPage />
               </AdminRoute>
             }
           />
