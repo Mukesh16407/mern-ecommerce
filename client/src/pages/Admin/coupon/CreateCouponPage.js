@@ -11,11 +11,13 @@ import { DeleteOutlined } from "@ant-design/icons";
 import AdminNav from "../../../Components/Nav/AdminNav";
 import "react-datepicker/dist/react-datepicker.css";
 export const CreateCouponPage = () => {
-  const [name, setName] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [discount, setDiscount] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [coupons, setCoupons] = useState([]);
+  const [coupon, setCoupon] = useState({
+    name: "",
+    expiry: new Date(),
+    discount: "",
+  });
 
   const { user } = useSelector((state) => state.auth);
 
@@ -25,17 +27,29 @@ export const CreateCouponPage = () => {
 
   const loadAllCoupons = () => getCoupons().then((res) => setCoupons(res.data));
 
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "expiry") {
+      setCoupon({ ...coupon, [name]: value });
+    } else {
+      // If it's any other field, update as usual
+      setCoupon({ ...coupon, [name]: value });
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    // console.table(name, expiry, discount);
+    // console.table(name, expiry, discount)
+    const { name, expiry, discount } = coupon;
     createCoupon({ name, expiry, discount }, user.token)
       .then((res) => {
         setLoading(false);
         loadAllCoupons(); // load all coupons
-        setName("");
-        setDiscount("");
-        setExpiry("");
+        setCoupon({
+          name: "",
+          expiry: new Date(),
+          discount: "",
+        });
         toast.success(`"${res.data.name}" is created`);
       })
       .catch((err) => console.log("create coupon err", err));
@@ -72,8 +86,9 @@ export const CreateCouponPage = () => {
               <input
                 type="text"
                 className="form-control"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                name="name"
+                onChange={handleOnChange}
+                value={coupon.name}
                 autoFocus
                 required
               />
@@ -84,8 +99,9 @@ export const CreateCouponPage = () => {
               <input
                 type="text"
                 className="form-control"
-                onChange={(e) => setDiscount(e.target.value)}
-                value={discount}
+                name="discount"
+                onChange={handleOnChange}
+                value={coupon.discount}
                 required
               />
             </div>
@@ -95,9 +111,11 @@ export const CreateCouponPage = () => {
               <br />
               <DatePicker
                 className="form-control"
-                selected={new Date()}
-                value={expiry}
-                onChange={(date) => setExpiry(date)}
+                selected={coupon.expiry}
+                name="expiry"
+                onChange={(date) =>
+                  handleOnChange({ target: { name: "expiry", value: date } })
+                }
                 required
               />
             </div>

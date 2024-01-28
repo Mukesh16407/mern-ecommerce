@@ -30,6 +30,7 @@ import Checkout from "./pages/checkout/Checkout";
 import { CreateCouponPage } from "./pages/Admin/coupon/CreateCouponPage";
 import { Notification } from "./Components/modal/Notification";
 import { useNetworkState } from "./hooks/useNetwork";
+import Payment from "./pages/Payment/Payment";
 
 function App() {
   const { isOnLine } = useNetworkState();
@@ -140,6 +141,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
