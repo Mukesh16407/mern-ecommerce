@@ -33,11 +33,11 @@ const Checkout = () => {
 
   const dispatch = useDispatch();
 
-  console.log(user, "user");
+  // console.log(user, "user");
 
   useEffect(() => {
     getUserCart(user?.token).then((res) => {
-      console.log("user cart res", JSON.stringify(res.data, null, 4));
+      // console.log("user cart res", JSON.stringify(res.data, null, 4));
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     });
@@ -63,6 +63,8 @@ const Checkout = () => {
     emptyUserCart(user.token).then((res) => {
       setProducts([]);
       setTotal(0);
+      setTotalAfterDiscount(0);
+      setCoupon("");
       toast.success("Cart is emapty. Contniue shopping.");
     });
   };
