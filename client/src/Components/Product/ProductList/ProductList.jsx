@@ -99,8 +99,9 @@ export const ProductList = ({ product }) => {
             <ShoppingCartOutlined
               className="text-danger"
               onClick={handleAddToCart}
+              disabled={product.quantity < 1}
             />{" "}
-            <br /> Add to Cart
+            <br /> {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
           </Tooltip>,
         ]}
       >

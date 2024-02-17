@@ -33,7 +33,7 @@ const Checkout = () => {
 
   const dispatch = useDispatch();
 
-  // console.log(user, "user");
+  console.log(totalAfterDiscount, "totalAfterDiscount");
 
   useEffect(() => {
     getUserCart(user?.token).then((res) => {
