@@ -21,7 +21,7 @@ router.delete("/user/cart", authCheck, emptyCart); // empty cart
 router.post("/user/address", authCheck, saveAddress);
 
 router.post("/user/order", authCheck, createOrder);
-// router.get("/user/orders", authCheck, orders);
+router.get("/user/orders", authCheck, orders);
 // coupon
 router.post("/user/cart/coupon", authCheck, applyCouponToUserCart);
 

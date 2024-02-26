@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Product = require("../models/product");
 const Cart = require("../models/cart");
 const Coupon = require("../models/coupon");
+const Order = require("../models/order");
 
 exports.userCart = async (req, res) => {
   const { cart } = req.body;
@@ -146,4 +147,14 @@ exports.createOrder = async (req, res) => {
 
   console.log("NEW ORDER SAVED", newOrder);
   res.json({ ok: true });
+};
+
+exports.orders = async (req, res) => {
+  let user = await User.findOne({ email: req.user.email }).exec();
+
+  let userOrders = await Order.find({ orderdBy: user._id })
+    .populate("products.product")
+    .exec();
+
+  res.json(userOrders);
 };
