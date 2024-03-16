@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import History from "./pages/user/History";
 import Password from "./pages/user/Password";
-import Wishlist from "./pages/user/WatchList";
+import Wishlist from "./pages/user/WishList";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute";
 import AdminDashBoard from "./pages/Admin/AdminDashBoard";
 import AdminRoute from "./Components/Routes/AdminRoute";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Tabs, Tooltip } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -11,7 +11,9 @@ import RatingModal from "../modal/RatingModal";
 import { showAverage } from "../../functions/rating";
 import { addToCart } from "../../redux/cart/Action";
 import _ from "lodash";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist } from "../../functions/user";
+import { toast } from "react-toastify";
 const { TabPane } = Tabs;
 
 export const SingleProduct = ({ product, onStarClick, star }) => {
@@ -20,7 +22,8 @@ export const SingleProduct = ({ product, onStarClick, star }) => {
   const [tooltip, setTooltip] = useState("Click to add");
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   const handleAddToCart = () => {
     // create cart array
     let cart = [];
@@ -44,6 +47,15 @@ export const SingleProduct = ({ product, onStarClick, star }) => {
       // show tooltip
       setTooltip("Added");
     }
+  };
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    addToWishlist(product._id, user.token).then((res) => {
+      console.log("ADDED TO WISHLIST", res.data);
+      toast.success("Added to wishlist");
+      // navigate("/user/wishlist");
+    });
   };
 
   return (
@@ -89,9 +101,9 @@ export const SingleProduct = ({ product, onStarClick, star }) => {
               />{" "}
               <br /> Add to Cart
             </Tooltip>,
-            <Link to="/">
+            <a onClick={handleAddToWishlist}>
               <HeartOutlined className="text-info" /> <br /> Add to Wishlist
-            </Link>,
+            </a>,
             <RatingModal>
               <StarRating
                 name={_id}
