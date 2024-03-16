@@ -3,21 +3,20 @@ import UserNav from "../../Components/Nav/UserNav";
 import { getUserOrders } from "../../functions/stripe";
 import { useSelector, useDispatch } from "react-redux";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { toast } from "react-toastify";
 import ShowPaymentInfo from "../../Components/card/ShowPaymentInfo";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Invoice from "../../Components/order/Invoice";
 
 const History = () => {
   const [orders, setOrders] = useState([]);
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
 
   useEffect(() => {
     loadUserOrders();
   }, []);
-
+  console.log(orders, "Orders");
   const loadUserOrders = () =>
     getUserOrders(user?.token).then((res) => {
-      console.log(JSON.stringify(res.data, null, 4));
       setOrders(res.data);
     });
 
@@ -57,6 +56,16 @@ const History = () => {
     </table>
   );
 
+  const showDownloadLink = (order) => (
+    <PDFDownloadLink
+      document={<Invoice order={order} />}
+      fileName="invoice.pdf"
+      className="btn btn-sm btn-block btn-outline-primary"
+    >
+      Download PDF
+    </PDFDownloadLink>
+  );
+
   const showEachOrders = () =>
     orders.map((order, i) => (
       <div key={i} className="m-5 p-3 card">
@@ -64,7 +73,7 @@ const History = () => {
         {showOrderInTable(order)}
         <div className="row">
           <div className="col">
-            <p style={{ color: "black" }}>PDF download</p>
+            <p style={{ color: "black" }}>{showDownloadLink(order)}</p>
           </div>
         </div>
       </div>
