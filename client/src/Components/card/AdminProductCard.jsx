@@ -9,7 +9,7 @@ const { Meta } = Card;
 const AdminProductCard = ({ product, handleRemove }) => {
   // destructure
   const { title, description, images, slug } = product;
-  console.log(images, "images");
+
   return (
     <Card
       cover={

@@ -37,7 +37,7 @@ export const ProductList = ({ product }) => {
       // remove duplicates
       let unique = _.uniqWith(cart, _.isEqual);
       // save to local storage
-      // console.log('unique', unique)
+
       localStorage.setItem("cart", JSON.stringify(unique));
       // add to redux state
       dispatch(addToCart(unique));

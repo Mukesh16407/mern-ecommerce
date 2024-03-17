@@ -13,7 +13,7 @@ export const StripeCheckout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { coupon } = useSelector((state) => ({ ...state }));
-  console.log(coupon, "Coupon");
+
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
@@ -29,7 +29,6 @@ export const StripeCheckout = () => {
 
   useEffect(() => {
     createPaymentIntent(user.token, coupon).then((res) => {
-      console.log("create payment intent", res.data);
       setClientSecret(res.data.clientSecret);
       // additional response received on successful payment
       setCartTotal(res.data.cartTotal);
@@ -75,7 +74,6 @@ export const StripeCheckout = () => {
         }
       });
       // empty user cart from redux store and local storage
-      console.log(JSON.stringify(payload, null, 4));
       setError(null);
       setProcessing(false);
       setSucceeded(true);

@@ -13,7 +13,6 @@ const SubCategoryHome = () => {
   useEffect(() => {
     setLoading(true);
     getSub(slug).then((res) => {
-      console.log(JSON.stringify(res.data, null, 4));
       setSubCategory(res.data);
       setProducts(res.data.products);
       setLoading(false);

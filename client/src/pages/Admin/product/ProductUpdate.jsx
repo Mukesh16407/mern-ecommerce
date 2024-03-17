@@ -44,7 +44,6 @@ const ProductUpdate = () => {
 
   const loadProduct = () => {
     getProduct(slug).then((p) => {
-      //console.log("single product", p);
       // 1 load single proudct
       setValues({ ...values, ...p.data });
       // 2 load single product category subs
@@ -56,33 +55,29 @@ const ProductUpdate = () => {
       p.data.subs.map((s) => {
         arr.push(s._id);
       });
-      console.log("ARR", arr);
+
       setArrayOfSubs((prev) => arr);
     });
   };
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    // console.log(e.target.name, " ----- ", e.target.value);
   };
 
   const loadCategories = () => {
     getCategories().then((c) => {
-      console.log("GET CATEGORIES IN UPDATE PRODUCT", c.data);
       setCategories(c.data);
     });
   };
 
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log("CLICKED CATEGORY", e.target.value);
     setValues({ ...values, subs: [] });
     setSelectedCategory(e.target.value);
 
     getCategorySubs(e.target.value).then((res) => {
-      console.log("SUB OPTIONS ON CATGORY CLICK", res);
       setSubOptions(res.data);
     });
-    console.log("EXISTING CATEGORY values.category", values.category);
+
     // if user clicks back to the original category
     // show its sub categories in default
     if (values.category._id === e.target.value) {

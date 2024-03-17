@@ -51,8 +51,6 @@ const Shop = () => {
   let { search } = useSelector((state) => ({ ...state }));
   const { text } = search;
 
-  console.log(subs);
-
   useEffect(() => {
     loadAllProducts();
     //fetch categories
@@ -131,7 +129,7 @@ const Shop = () => {
     setBrand("");
     setColor("");
     setShipping("");
-    // console.log(e.target.value);
+
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
     let foundInTheState = inTheState.indexOf(justChecked); // index or -1
@@ -145,13 +143,12 @@ const Shop = () => {
     }
 
     setCategoryIds(inTheState);
-    //console.log(inTheState);
+
     fetchProducts({ category: inTheState });
   };
 
   // 5. show products by star rating
   const handleStarClick = (num) => {
-    // console.log(num);
     dispatch(searchQuery({ text: "" }));
     setPrice([0, 0]);
     setCategoryIds([]);
@@ -187,7 +184,6 @@ const Shop = () => {
     ));
 
   const handleSub = (sub) => {
-    // console.log("SUB", sub);
     setSub(sub);
     dispatch(searchQuery({ text: "" }));
     setPrice([0, 0]);

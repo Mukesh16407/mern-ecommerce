@@ -43,7 +43,6 @@ export const Header = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        //console.log(user)
         const idTokenResult = await user.getIdTokenResult();
         user
           .getIdToken(/* forceRefresh */ true)

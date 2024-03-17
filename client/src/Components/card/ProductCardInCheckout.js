@@ -15,8 +15,6 @@ const ProductCardInCheckout = ({ p }) => {
   let dispatch = useDispatch();
 
   const handleColorChange = (e) => {
-    console.log("color changed", e.target.value);
-
     let cart = [];
     if (typeof window !== "undefined") {
       if (localStorage.getItem("cart")) {
@@ -29,7 +27,6 @@ const ProductCardInCheckout = ({ p }) => {
         }
       });
 
-      //  console.log('cart udpate color', cart)
       localStorage.setItem("cart", JSON.stringify(cart));
       dispatch(addToCart(cart));
     }
@@ -59,7 +56,6 @@ const ProductCardInCheckout = ({ p }) => {
   };
 
   const handleRemove = () => {
-    // console.log(p._id, "to remove");
     let cart = [];
 
     if (typeof window !== "undefined") {

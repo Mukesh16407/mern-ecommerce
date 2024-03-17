@@ -16,13 +16,12 @@ exports.createPaymentIntent = async (req, res) => {
 
   // 1 find user
   const user = await User.findOne({ email: req.user.email }).exec();
-  console.log(user, "User");
+
   // 2 get user cart total
   const { cartTotal, totalAfterDiscount } = await Cart.findOne({
     orderdBy: user._id,
   }).exec();
 
-  console.log("CART TOTAL", cartTotal, "AFTER DIS%", totalAfterDiscount);
   let finalAmount = 0;
   if (couponApplied && totalAfterDiscount) {
     finalAmount = totalAfterDiscount * 100;

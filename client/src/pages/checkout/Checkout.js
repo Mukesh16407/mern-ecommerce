@@ -72,9 +72,7 @@ const Checkout = () => {
   };
 
   const applyDiscountCoupon = () => {
-    console.log("send coupon to backend", coupon);
     applyCoupon(user.token, coupon).then((res) => {
-      console.log("RES ON COUPON APPLIED", res.data);
       if (res.data) {
         setTotalAfterDiscount(res.data);
         // update redux coupon applied true/false

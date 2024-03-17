@@ -42,7 +42,6 @@ export const ProductCreate = () => {
     e.preventDefault();
     createProduct(values, user.token)
       .then((res) => {
-        console.log(res);
         window.alert(`"${res.data.title}" is created`);
         window.location.reload();
       })
@@ -55,15 +54,13 @@ export const ProductCreate = () => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    // console.log(e.target.name, " ----- ", e.target.value);
   };
 
   const handleCatagoryChange = (e) => {
     e.preventDefault();
-    //console.log("CLICKED CATEGORY", e.target.value);
+
     setValues({ ...values, subs: [], category: e.target.value });
     getCategorySubs(e.target.value).then((res) => {
-      // console.log("SUB OPTIONS ON CATGORY CLICK", res);
       setSubOptions(res.data);
     });
     setShowSub(true);

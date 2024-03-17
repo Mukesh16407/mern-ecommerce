@@ -14,7 +14,7 @@ const History = () => {
   useEffect(() => {
     loadUserOrders();
   }, []);
-  console.log(orders, "Orders");
+
   const loadUserOrders = () =>
     getUserOrders(user?.token).then((res) => {
       setOrders(res.data);

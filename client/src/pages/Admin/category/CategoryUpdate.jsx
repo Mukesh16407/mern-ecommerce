@@ -21,7 +21,7 @@ const CategoryUpdate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name);
+
     setLoading(true);
     updateCategory(slug, { name }, user.token)
       .then((res) => {

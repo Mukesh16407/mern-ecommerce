@@ -7,7 +7,6 @@ import { Avatar, Badge, Space } from "antd";
 export const FileUpload = ({ values, setValues, setLoading }) => {
   const { user } = useSelector((state) => state.auth);
 
-  console.log(values);
   const fileUploadAndResize = (e) => {
     let files = e.target.files; // 3
     let allUploadedFiles = values.images;
@@ -32,7 +31,6 @@ export const FileUpload = ({ values, setValues, setLoading }) => {
                 }
               )
               .then((res) => {
-                console.log("IMAGE UPLOAD RES DATA", res);
                 setLoading(false);
                 allUploadedFiles.push(res.data);
 
@@ -51,7 +49,7 @@ export const FileUpload = ({ values, setValues, setLoading }) => {
 
   const handleImageRemove = (public_id) => {
     setLoading(true);
-    // console.log("remove image", public_id);
+
     axios
       .post(
         `${process.env.REACT_APP_API}/removeimage`,

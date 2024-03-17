@@ -18,7 +18,6 @@ export const Cart = () => {
     //
     userCart(cart, user.token)
       .then((res) => {
-        console.log("CART POST RES", res);
         if (res.data.ok) navigate("/checkout");
       })
       .catch((err) => console.log("cart save err", err));
@@ -32,7 +31,6 @@ export const Cart = () => {
     });
     userCart(cart, user.token)
       .then((res) => {
-        console.log("CART POST RES", res);
         if (res.data.ok) navigate("/checkout");
       })
       .catch((err) => console.log("cart save err", err));

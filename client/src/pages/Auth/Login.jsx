@@ -30,7 +30,6 @@ export const Login = () => {
 
   const roleBaseRedirect = (req) => {
     let intended = location.state;
-    console.log(intended, "intended");
 
     if (intended) {
       navigate(intended.from);
@@ -74,7 +73,7 @@ export const Login = () => {
             role: res.data.role,
             _id: res.data._id,
           };
-          console.log("CREATE AND UPDATE", res);
+
           dispatch(setActiveUser(getUserData));
           roleBaseRedirect(res);
         })

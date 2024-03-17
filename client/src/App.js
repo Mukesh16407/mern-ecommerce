@@ -34,7 +34,7 @@ import Payment from "./pages/Payment/Payment";
 
 function App() {
   const { isOnLine } = useNetworkState();
-  console.log(isOnLine, "id");
+
   return (
     <div>
       {!isOnLine ? (
