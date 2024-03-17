@@ -8,7 +8,7 @@ Reset you r password
 ![Screenshot (173)](https://github.com/Mukesh16407/mern-ecommerce/assets/66511917/0bce9439-6ec9-4284-acb5-b100b27d9ae2)
 Home DashBoard
 ![Screenshot (174)](https://github.com/Mukesh16407/mern-ecommerce/assets/66511917/e54fdfae-863a-441c-bcbd-6bae214be20a)
-Soping Page
+shopping Page
 ![Screenshot (175)](https://github.com/Mukesh16407/mern-ecommerce/assets/66511917/216c8d6f-cdca-4d63-b1f1-b6edc8a2505d)
 View Product page
 ![Screenshot (176)](https://github.com/Mukesh16407/mern-ecommerce/assets/66511917/bff3709d-2137-405b-b919-394ca9fbad5e)
