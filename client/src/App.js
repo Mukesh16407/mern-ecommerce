@@ -31,6 +31,7 @@ import { CreateCouponPage } from "./pages/Admin/coupon/CreateCouponPage";
 import { Notification } from "./Components/modal/Notification";
 import { useNetworkState } from "./hooks/useNetwork";
 import Payment from "./pages/Payment/Payment";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   const { isOnLine } = useNetworkState();
@@ -142,6 +143,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>
